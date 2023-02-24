@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Website Logic</title>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a onclick="reRender()" id="home">Home</a>
+            <a onclick="darkMode()" id="mode">DarkMode</a>
+            <a onclick="modeSad()" id="sad">ModeGalau</a>
+        </nav>
+        <h1 id="h1">LATIHAN LOGIC KASAR DARKMODE SEDERHANA</h1>
+        <p class="info" id="info"></p>
+        <audio id="music" onclick="playAudio()" controls>
+            <source src="bahanVideo/cheating on you.mp3" >
+        </audio>
+        
+    </div>
+
+    <!-- data js fuction -->
+    <script>
+        let body = document.body
+        let info = document.getElementById("info")
+        let mode = document.getElementById("mode")
+        let home = document.getElementById("home")
+        let sad = document.getElementById("sad")
+        let music = document.getElementById("music")
+        
+
+        const darkLimit = 3
+        let darkCounter = 0
+        let darkRemainingLeft
+
+        music.style.display = "none"
+
+
+        function darkMode(){
+            if(darkCounter +=1){
+                mode.textContent = "LightMode"
+            }if(darkCounter -=1){
+                mode.textContent = "DarkMode"
+            }
+
+            if(darkRemainingLeft == 1){
+                info.textContent = "🔥 MODE FITUR ANDA SUDAH HABIS 🔥"
+                mode.style.display = "none"
+                home.textContent = "RESTART"
+                console.log("Jatah mode fitur anda sudah habis")
+                return
+            }
+            darkCounter += 1
+            darkRemainingLeft = darkLimit - darkCounter
+            console.log('mode fitur di klik sebanyak : ', darkCounter)
+            console.log('kesempatan anda : ', darkRemainingLeft)
+
+            // render ke info element
+            info.textContent = `ModeFitur dipakai ${darkCounter}x, tersisa ${darkRemainingLeft}`
+            body.classList.toggle("dark")
+        }
+
+        function reRender(){
+            location.reload()
+        }
+
+        function modeSad(){
+            info.style.display = "none"
+            h1.style.display = "none"
+            music.style.display = "block"
+
+            body.classList.toggle("sad")
+        }
+
+    </script>
+</body>
+</html>
